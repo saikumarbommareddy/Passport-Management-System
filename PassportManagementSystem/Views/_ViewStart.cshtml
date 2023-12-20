@@ -1,0 +1,17 @@
+﻿@{
+    if (HttpContext.Current.Session["ApplyType"] != null && HttpContext.Current.Session["EmailAddress"] !=null && HttpContext.Current.Session["UserID"] != null)
+    {
+        if (HttpContext.Current.Session["ApplyType"].ToString() == "Passport User")
+        {
+            Layout = "~/Views/Shared/_DashboardLayout1.cshtml";
+        }
+        else if(HttpContext.Current.Session["ApplyType"].ToString() == "Admin")
+        {
+            Layout = "~/Views/Shared/_DashboardLayout2.cshtml";
+        }
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    }
+}

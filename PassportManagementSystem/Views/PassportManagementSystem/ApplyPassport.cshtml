@@ -1,0 +1,120 @@
+﻿@model PassportManagementSystem.Models.PassportApplication
+@{
+    ViewBag.Title = "ApplyPassport";
+    PassportManagementSystem.Models.PassportApplication userdata = (PassportManagementSystem.Models.PassportApplication)ViewBag.data;
+    <link href="~/Styles/ApplyPassport.css" rel="stylesheet" />
+}
+
+<h3 class="title-register">APPLY PASSPORT</h3>
+<div style="float:right;color:red;font-weight:bold;margin-right:10%;">* All Fields are Required</div>
+<div class="register-form">
+    @using (Html.BeginForm(null, null, System.Web.Mvc.FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="div-left">
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.UserID, new { @class = "form-control", @Value = ViewBag.UserID, @readonly = "true" })
+                @Html.ValidationMessageFor(a => a.UserID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.Country, new { @class = "form-control", @placeholder = "Country *" })
+                @Html.ValidationMessageFor(a => a.Country, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.State, new { @class = "form-control", @placeholder = "State *" })
+                @Html.ValidationMessageFor(a => a.State, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.City, new { @class = "form-control", @placeholder = "City *" })
+                @Html.ValidationMessageFor(a => a.City, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.ProofOfCitizenship, new { @class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.Photo, new { @class = "form-control"})
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(a => a.BirthCertificate, new { @class = "form-control"})
+            </div>
+        </div>
+
+        <div class="div-right">
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.Zip, new { @class = "form-control", @placeholder = "ZIP *", @type = "number" })
+                @Html.ValidationMessageFor(a => a.Zip, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(a => a.TypeOfService, new List<SelectListItem> {
+                          new SelectListItem { Value = "Regular" , Text = "Regular" },
+                          new SelectListItem { Value = "Urgent Travel" , Text = "Urgent Travel" },
+                          new SelectListItem { Value = "Emergency" , Text = "Emergency" },
+                          new SelectListItem { Value = "Expidited" , Text = "Expidited" }
+                       }, "-- Select Type of Service -- *", new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.TypeOfService, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(a => a.BookletType, new List<SelectListItem> {
+                          new SelectListItem { Value = "30 Pages" , Text = "30 Pages" },
+                          new SelectListItem { Value = "60 Pages" , Text = "60 Pages" }
+                       }, "-- Select Type of Booklet -- *", new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.BookletType, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.IssueDate, new { @class = "form-control", @placeholder = "Issue Date MM/DD/YYYY *" })
+                @Html.ValidationMessageFor(a => a.IssueDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.ProofOfCitizenship, new { @class = "form-control", @placeholder = "Proof Of Citizenship pdf*", @type ="file" ,@accept = "application/pdf"})
+                @Html.ValidationMessageFor(a => a.ProofOfCitizenship, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.Photo, new { @class = "form-control", @placeholder = "Photo image*", @type = "file", @accept = "image/jpeg" })
+                @Html.ValidationMessageFor(a => a.Photo, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.BirthCertificate, new { @class = "form-control", @placeholder = "Birth Certificate pdf*", @type = "file", @accept = "application/pdf" })
+                @Html.ValidationMessageFor(a => a.BirthCertificate, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" class="btn btn-primary" value="APPLY" style="float:right;margin-right:37%;margin-top:5%;" />
+        </div>
+        if (userdata != null)
+        {
+            <div class="alert alert-dismissible alert-success" style="position:absolute;margin:1% 25% 0% 25%;width:35%;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p>Dear User,</p>
+                <p style="color:red;">Need the Passport Number while giving payment.</p>
+                <p>Please note down your Passport ID <span style="color:mediumblue">@userdata.PassportNumber</span>.</p>
+                <p>Passport Application Cost is Rs. <span style="color:mediumblue">@userdata.Amount</span>.</p>
+            </div>
+        }
+        if (ViewBag.error != null)
+        {
+            <div class="alert alert-dismissible alert-danger" style="position:absolute;margin:18% 22% 0% 27%;width:30%;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <span>@ViewBag.error</span>
+            </div>
+        }
+    }
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+   $(document).ready(function () {
+      var currentDate = new Date();
+       $("#IssueDate").datepicker({
+      format: 'dd/mm/yyyy',
+      autoclose:true,
+      endDate: "currentDate",
+      minDate: currentDate,
+      maxDate: currentDate
+      }).on('changeDate', function (ev) {
+         $(this).datepicker('hide');
+      });
+       $("#IssueDate").keyup(function () {
+         if (this.value.match(/[^0-9]/g)) {
+            this.value = this.value.replace(/[^0-9^-]/g, '');
+         }
+      });
+   });
+</script>

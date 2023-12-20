@@ -1,0 +1,26 @@
+﻿.title {
+    margin-left: 2%;
+}
+
+.title-register {
+    margin-top: 5%;
+    margin-bottom: 1%;
+    text-align: center;
+}
+
+.register-form {
+    padding-top: 5%;
+    padding-bottom: 45%;
+}
+
+.div-left {
+    width: 50%;
+    float: left;
+    padding-left: 5%;
+    padding-right: 10%;
+}
+
+.div-right {
+    width: 50%;
+    margin-left:45%;
+}

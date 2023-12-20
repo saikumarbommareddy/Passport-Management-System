@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="~/Content/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body id="page-top">
+    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+        <h3 class="navbar-brand mr-1">Passport Application Services</h3>
+        @if (HttpContext.Current.Session["Welcome"] != null)
+        {
+            <h6 style="color:white;margin-left:52%;">Welcome, @HttpContext.Current.Session["Welcome"]</h6>
+        }
+        <ul class="navbar-nav ml-auto ml-md-0">
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-power-off fa-2x"></i>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    @if (HttpContext.Current.Session["EmailAddress"] != null)
+                    {
+                        <h6 class="dropdown-item">@HttpContext.Current.Session["EmailAddress"]</h6>
+                    }
+                    <div class="dropdown-divider"></div>
+                    @Html.ActionLink("Logout", "Login", "PassportManagementSystem", null, new { @class = "dropdown-item" })
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <div id="wrapper">
+        <ul class="sidebar navbar-nav">
+            <li class="nav-item">
+                @Html.ActionLink("Applicant Details", "ApplicantDetails", "PassportManagementSystem", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("About Us", "About", "PassportManagementSystem", null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Contact Us", "Contact", "PassportManagementSystem", null, new { @class = "nav-link" })
+            </li>
+        </ul>
+
+        <div id="content-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; @DateTime.Now.Year Website by PMS Team , All Rights Reserved</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+﻿@model List<PassportManagementSystem.Models.ApplicantDetails>
+    @{
+        ViewBag.Title = "ApplicantDetails";
+        //# PassportManagementSystem.Models.PassportApplication userdata = (PassportManagementSystem.Models.PassportApplication)ViewBag.data;
+        <link href="~/Styles/ApplicantDetails.css" rel="stylesheet" />
+    }
+    <h3 class="title-register">APPLICANT DETAILS</h3>
+    <div class="register-form">
+        @using (Html.BeginForm())
+        {
+            <table class="table-striped" cellpadding="10" align="center" width="100%">
+                <tr>
+                    <th>UserID</th>
+                    <th>Passport Number</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Date Of Birth</th>
+                    <th>Email Address</th>
+                    <th>Contact Number</th>
+                    <th>Application Date</th>
+                </tr>
+                @foreach (var d in Model)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(@d.users.UserID, "Applicant", "PassportManagementSystem", new { userID = @d.users.UserID }, null)</td>
+                        <td>@d.passports.PassportNumber</td>
+                        <td>@d.users.FirstName</td>
+                        <td>@d.users.LastName</td>
+                        <td>@d.users.DateOfBirth.ToString("MM/dd/yyyy")</td>
+                        <td>@d.users.EmailAddress</td>
+                        <td>@d.users.ContactNumber</td>
+                        <td>@d.passports.IssueDate.ToString("MM/dd/yyyy")</td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

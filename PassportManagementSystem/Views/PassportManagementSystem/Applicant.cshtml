@@ -1,0 +1,131 @@
+﻿@model PassportManagementSystem.Models.ApplicantDetails
+@{
+    ViewBag.Title = "Applicant Information";
+    PassportManagementSystem.Models.ApplicantDetails details = (PassportManagementSystem.Models.ApplicantDetails)ViewBag.data;
+    <link href="~/Styles/Applicant.css" rel="stylesheet" />
+}
+<h3 class="title-register">APPLICANT INFORMATION</h3>
+<div class="register-form">
+    @using (Html.BeginForm("Applicant", "PassportManagementSystem", new { @userID = Model.passports.UserID, @passportNum = @Model.passports.PassportNumber }, FormMethod.Post, null))
+    {
+        <div style="margin-left:55%;margin-top:0%;position:absolute">
+            <img src="data:image/jpg;base64,@(Convert.ToBase64String(Model.passports.Photo))" width="250" height="250" alt="@Model.users.FirstName+_+@Model.users.LastName" />
+        </div>
+
+        if (details != null)
+        {
+            <div class="alert alert-dismissible alert-success" style="width:40%;margin-left:21%;position:absolute">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p>Dear Admin,</p>
+                <p>Passport <span style="color:mediumblue">@details.passports.PassportNumber</span> status has changed to <span style="color:mediumblue">@details.passports.Status</span> .</p>
+            </div>
+        }
+
+        <table class="table">
+            <tr>
+                <th>User ID</th>
+                <td>@Html.DisplayFor(a => a.users.UserID)</td>
+            </tr>
+            <tr>
+                <th>Passport Number</th>
+                <td>@Html.DisplayFor(a => a.passports.PassportNumber)</td>
+            </tr>
+            <tr>
+                <th>First Name</th>
+                <td>@Html.DisplayFor(a => a.users.FirstName)</td>
+            </tr>
+            <tr>
+                <th>Last Name</th>
+                <td>@Html.DisplayFor(a => a.users.LastName)</td>
+            </tr>
+            <tr>
+                <th>Date Of Birth</th>
+                <td>@Convert.ToDateTime(Model.users.DateOfBirth).ToString("MM/dd/yyyy")</td>
+            </tr>
+            <tr>
+                <th>Contact Number</th>
+                <td>@Html.DisplayFor(a => a.users.ContactNumber)</td>
+            </tr>
+            <tr>
+                <th>Email ID</th>
+                <td>@Html.DisplayFor(a => a.users.EmailAddress)</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>@Html.DisplayFor(a => a.users.Address)</td>
+            </tr>
+            <tr>
+                <th>Country</th>
+                <td>@Html.DisplayFor(a => a.passports.Country)</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>@Html.DisplayFor(a => a.passports.State)</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>@Html.DisplayFor(a => a.passports.City)</td>
+            </tr>
+            <tr>
+                <th>ZIP</th>
+                <td>@Html.DisplayFor(a => a.passports.Zip)</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>@Html.DisplayFor(a => a.users.Gender)</td>
+            </tr>
+            <tr>
+                <th>Citizen Type</th>
+                <td>@Html.DisplayFor(a => a.users.CitizenType)</td>
+            </tr>
+            <tr>
+                <th>Type Of Service</th>
+                <td>@Html.DisplayFor(a => a.passports.TypeOfService)</td>
+            </tr>
+            <tr>
+                <th>Booklet Type</th>
+                <td>@Html.DisplayFor(a => a.passports.BookletType)</td>
+            </tr>
+            <tr>
+                <th>Application Date</th>
+                <td>@Convert.ToDateTime(Model.passports.IssueDate).ToString("MM/dd/yyyy")</td>
+            </tr>
+            <tr>
+                <th>Reason for ReIssue</th>
+                <td>@Html.DisplayFor(a => a.passports.ReasonForReIssue)</td>
+            </tr>
+            <tr>
+                <th>Proof Of Citizenship</th>
+                <td>
+                    @Html.ActionLink("Proof_Of_Citizenship_" + Model.users.UserID + ".pdf", "DownloadFile", "PassportManagementSystem", new { userID = Model.users.UserID, identifier = "POC" }, null)
+                </td>
+            </tr>
+            <tr>
+                <th>Birth Certificate</th>
+                <td>
+                    @Html.ActionLink("Birth_Certificate_" + Model.users.UserID + ".pdf", "DownloadFile", "PassportManagementSystem", new { userID = Model.users.UserID, identifier = "BC" }, null)
+                </td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>
+                    @Html.DropDownList("Status", new List<SelectListItem> {
+                           new SelectListItem { Value = "Approved" , Text = "Approved" },
+                           new SelectListItem { Value = "Rejected" , Text = "Rejected" }
+                        }, new { @class = "form-control" })
+                </td>
+            </tr>
+            <tr>
+                <th>Comments</th>
+                <td>@Html.TextArea("Comments", new { @class = "form-control" })</td>
+            </tr>
+            <tr>
+                <th></th>
+                <td><input type="submit" class="btn btn-primary" value="SUBMIT" style="float:right;" /></td>
+            </tr>
+        </table>
+    }
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

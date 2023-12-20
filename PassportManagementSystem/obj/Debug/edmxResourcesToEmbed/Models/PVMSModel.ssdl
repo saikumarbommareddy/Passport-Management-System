@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PassportVisaManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PassportVisaManagementSystem.dbo.City' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="STATE_ID" />
+      <PropertyRef Name="CITY_NAME" />
+    </Key>
+    <Property Name="STATE_ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CITY_NAME" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PassportApplication">
+    <Key>
+      <PropertyRef Name="PassportNumber" />
+    </Key>
+    <Property Name="PassportNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Zip" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TypeOfService" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="BookletType" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IssueDate" Type="date" Nullable="false" />
+    <Property Name="ExpiryDate" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="ReasonForReIssue" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProofOfCitizenship" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Photo" Type="image" Nullable="false" />
+    <Property Name="BirthCertificate" Type="varbinary(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="STATE_ID" />
+    </Key>
+    <Property Name="STATE_ID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="STATE_NAME" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRegistration">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ApplyType" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SecurityQuestion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SecurityAnswer" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CitizenType" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PassportUserID">
+    <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+    <End Role="PassportApplication" Type="Self.PassportApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRegistration">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PassportApplication">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_STATEID">
+    <End Role="State" Type="Self.State" Multiplicity="1" />
+    <End Role="City" Type="Self.City" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="STATE_ID" />
+      </Principal>
+      <Dependent Role="City">
+        <PropertyRef Name="STATE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PassportVisaManagementSystemModelStoreContainer">
+    <EntitySet Name="PassportApplication" EntityType="Self.PassportApplication" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="City" EntityType="Self.City" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [City].[STATE_ID] AS [STATE_ID], 
+    [City].[CITY_NAME] AS [CITY_NAME]
+    FROM [dbo].[City] AS [City]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_PassportUserID" Association="Self.FK_PassportUserID">
+      <End Role="UserRegistration" EntitySet="UserRegistration" />
+      <End Role="PassportApplication" EntitySet="PassportApplication" />
+    </AssociationSet>
+    <AssociationSet Name="FK_STATEID" Association="Self.FK_STATEID">
+      <End Role="State" EntitySet="State" />
+      <End Role="City" EntitySet="City" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

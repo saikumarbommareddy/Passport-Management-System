@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PassportVisaManagementSystemModelStoreContainer" CdmEntityContainer="PassportVisaManagementSystemEntities">
+    <EntitySetMapping Name="PassportApplications">
+      <EntityTypeMapping TypeName="PassportVisaManagementSystemModel.PassportApplication">
+        <MappingFragment StoreEntitySet="PassportApplication">
+          <ScalarProperty Name="BirthCertificate" ColumnName="BirthCertificate" />
+          <ScalarProperty Name="Photo" ColumnName="Photo" />
+          <ScalarProperty Name="ProofOfCitizenship" ColumnName="ProofOfCitizenship" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="PassportNumber" ColumnName="PassportNumber" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="TypeOfService" ColumnName="TypeOfService" />
+          <ScalarProperty Name="BookletType" ColumnName="BookletType" />
+          <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+          <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ReasonForReIssue" ColumnName="ReasonForReIssue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="PassportVisaManagementSystemModel.State">
+        <MappingFragment StoreEntitySet="State">
+          <ScalarProperty Name="STATE_ID" ColumnName="STATE_ID" />
+          <ScalarProperty Name="STATE_NAME" ColumnName="STATE_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRegistrations">
+      <EntityTypeMapping TypeName="PassportVisaManagementSystemModel.UserRegistration">
+        <MappingFragment StoreEntitySet="UserRegistration">
+          <ScalarProperty Name="SecurityAnswer" ColumnName="SecurityAnswer" />
+          <ScalarProperty Name="SecurityQuestion" ColumnName="SecurityQuestion" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="ApplyType" ColumnName="ApplyType" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CitizenType" ColumnName="CitizenType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cities">
+      <EntityTypeMapping TypeName="PassportVisaManagementSystemModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="STATE_ID" ColumnName="STATE_ID" />
+          <ScalarProperty Name="CITY_NAME" ColumnName="CITY_NAME" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

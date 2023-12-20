@@ -1,0 +1,94 @@
+﻿@model PassportManagementSystem.Models.UserRegistration
+@{
+    ViewBag.Title = "Register";
+    PassportManagementSystem.Models.UserRegistration userdata = (PassportManagementSystem.Models.UserRegistration)ViewBag.data;
+}
+
+<h3 class="title-register">New User Registration</h3>
+<div style="float:right;color:red;font-weight:bold">* All Fields are Required</div>
+<div class="register-form">
+    @using (Html.BeginForm())
+    {
+
+        <div class="div-left">
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.FirstName, new { @class = "form-control", @placeholder = "First Name *" })
+                @Html.ValidationMessageFor(a => a.FirstName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.LastName, new { @class = "form-control", @placeholder = "Last Name *" })
+                @Html.ValidationMessageFor(a => a.LastName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.DateOfBirth, new { @class = "form-control", @placeholder = "Date of Birth MM/DD/YYYY *" })
+                @Html.ValidationMessageFor(a => a.DateOfBirth, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextAreaFor(a => a.Address, new { @class = "form-control", @placeholder = "Address *", @rows = "3" })
+                @Html.ValidationMessageFor(a => a.Address, "", new { @class = "text-danger" })
+            </div>
+            <fieldset>
+                <legend>Gender *</legend>
+                <p style="float:left;margin-left:25%;">@Html.RadioButtonFor(a => a.Gender, "Male", new { @class = "form-check-input" })Male</p>
+                <p style="float:right;margin-right:20%;">@Html.RadioButtonFor(a => a.Gender, "Female", new { @class = "form-check-input" })Female</p>
+            </fieldset>
+            @Html.ValidationMessageFor(a => a.Gender, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="div-right">
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.ContactNumber, new { @class = "form-control", @placeholder = "Contact Number *", @type = "number" })
+                @Html.ValidationMessageFor(a => a.ContactNumber, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.EmailAddress, new { @class = "form-control", @placeholder = "EmailID  abc@gmail.com *" })
+                @Html.ValidationMessageFor(a => a.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(a => a.Password, new { @class = "form-control", @placeholder = "Password *"})
+                @Html.ValidationMessageFor(a => a.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.PasswordFor(a => a.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password *"})
+                @Html.ValidationMessageFor(a => a.ConfirmPassword, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.DropDownListFor(a => a.SecurityQuestion, new List<SelectListItem> {
+                           new SelectListItem { Value = "What is your Pet name ?" , Text = "What is your Pet name ?" },
+                           new SelectListItem { Value = "What is your Mother's name ?" , Text = "What is your Mother's name ?" },
+                           new SelectListItem { Value = "What is your Favourite Movie ?" , Text = "What is your Favourite Movie ?" }
+                        }, "-- Select Security Question -- *", new { @class = "form-control" })
+                @Html.ValidationMessageFor(a => a.SecurityQuestion, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(a => a.SecurityAnswer, new { @class = "form-control", @placeholder = "Answer the above Security Question *" })
+                @Html.ValidationMessageFor(a => a.SecurityAnswer, "", new { @class = "text-danger" })
+            </div>
+            <input type="submit" class="btn btn-primary" value="Register" style="float:right;margin-right:37%;margin-top:5%;" />
+        </div>
+        if (userdata != null)
+        {
+            <div class="alert alert-dismissible alert-success" style="position:absolute;margin:7% 15% 0% 17%;width:40%;">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <p>Dear User,</p>
+                <p>Your User Id is <span style="color:mediumblue">@userdata.UserID</span>.</p>
+                <p>Passport Account created successfully.</p>
+            </div>
+        }
+    }
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script>
+    $(document).ready(function () {
+        $(function () {
+            $("#DateOfBirth").datepicker({
+                yearRange: '-100:nn',
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: 'mm/dd/yy',
+            });
+        });
+    })
+</script>

@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="~/Styles/HomeMasterPage.css" rel="stylesheet" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="div-logo">
+        <h1 class="titlelogo"><img src="~/Images/logo_transparent.png" class="logo" /><span class="title">PASSPORT MANAGEMENT SYSTEM</span></h1>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    @Html.ActionLink("Home", "Home", "PassportManagementSystem", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("About Us", "About", "PassportManagementSystem", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Contact Us", "Contact", "PassportManagementSystem", null, new { @class = "nav-link" })
+                </li>
+            </ul>
+            <ul class="navbar-nav mr-auto1">
+                <li class="nav-item">
+                    @Html.ActionLink("Login", "Login", "PassportManagementSystem", null, new { @class = "nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("SignUp", "Register", "PassportManagementSystem", null, new { @class = "nav-link" })
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>Copyright &copy; @DateTime.Now.Year Website by PMS Team , All Rights Reserved</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

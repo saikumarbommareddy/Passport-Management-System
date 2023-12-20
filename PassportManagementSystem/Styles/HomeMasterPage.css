@@ -1,0 +1,39 @@
+﻿.div-logo {
+    height: 10%;
+    width: 100%;
+    background-image: url('../Images/background.jpg');
+    background-position: center;
+    padding-bottom: 1px;
+}
+.logo{
+    width:12%;
+    height:12%;
+}
+.titlelogo {
+    margin-left: 12%;
+    font-size: 2.5rem;
+}
+.title{
+    margin-left:7%;
+}
+.title-register{
+    margin-top:5%;
+    margin-bottom:2%;
+    text-align:center;
+}
+.register-form {
+    padding-top: 5%;
+    padding-bottom: 55%;
+}
+
+.div-left {
+    width: 50%;
+    float: left;
+    padding-left: 15%;
+}
+
+.div-right {
+    width: 50%;
+    float: left;
+    padding-left: 10%;
+}

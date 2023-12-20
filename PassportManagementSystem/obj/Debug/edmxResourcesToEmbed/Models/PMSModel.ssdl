@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PassportManagementSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="PassportApplication">
+    <Key>
+      <PropertyRef Name="PassportNumber" />
+    </Key>
+    <Property Name="PassportNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Country" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="State" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="City" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Zip" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TypeOfService" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="BookletType" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IssueDate" Type="date" Nullable="false" />
+    <Property Name="ExpiryDate" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="int" Nullable="false" />
+    <Property Name="ReasonForReIssue" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProofOfCitizenship" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Photo" Type="image" Nullable="false" />
+    <Property Name="BirthCertificate" Type="varbinary(max)" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="UserRegistration">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="DateOfBirth" Type="date" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContactNumber" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="EmailAddress" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ApplyType" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SecurityQuestion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="SecurityAnswer" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="CitizenType" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_PassportUserID">
+    <End Role="UserRegistration" Type="Self.UserRegistration" Multiplicity="1" />
+    <End Role="PassportApplication" Type="Self.PassportApplication" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserRegistration">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="PassportApplication">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PassportManagementSystemModelStoreContainer">
+    <EntitySet Name="PassportApplication" EntityType="Self.PassportApplication" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_PassportUserID" Association="Self.FK_PassportUserID">
+      <End Role="UserRegistration" EntitySet="UserRegistration" />
+      <End Role="PassportApplication" EntitySet="PassportApplication" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
